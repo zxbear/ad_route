@@ -16,6 +16,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "ad_route"
 include ':app'
-include ':lib_router_api'
-include ':lib_route_annotation'
-include ':lib_route_processor'
+include ':route_api'
+include ':route_annotation'
+include ':route_compiler'

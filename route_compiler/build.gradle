@@ -8,7 +8,7 @@ java {
 }
 
 dependencies {
-    implementation project(":lib_route_annotation")
+    implementation project(':route_annotation')
     implementation 'com.squareup:javapoet:1.13.0'//JavaPoet 编写代码使用
     implementation 'com.google.auto.service:auto-service:1.0-rc7'
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc7'//auto-service 注册Processor
