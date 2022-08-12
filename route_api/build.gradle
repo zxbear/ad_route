@@ -24,8 +24,7 @@ android {
 }
 
 dependencies {
-    implementation project(':route_annotation')
     dependenciesID.each{ k, v -> implementation v}
-
+    api project(':route_annotation')
     annotationProcessor project(':route_compiler')
 }

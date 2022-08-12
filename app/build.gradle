@@ -31,10 +31,9 @@ android {
 }
 
 dependencies {
-    implementation project(':route_api')
-    implementation project(':route_annotation')
     //远程依赖引用
     dependenciesID.each { k, v -> implementation v }
 
+    implementation project(':route_api')
     annotationProcessor project(':route_compiler')
 }
