@@ -31,6 +31,6 @@ public class test1Activity extends Activity{...}
 // 1. Simple jump within application
 Router.init(this);
 
-// 2.2. Jump with your need skip code
+// 2. Jump with your need skip code
 Router.getInstance().starActivity(this,"com/cn/test");
 ```
