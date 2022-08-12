@@ -36,6 +36,5 @@ Router.getInstance().starActivity(this,"com/cn/test");
 ```
 
 **I. Notes**
-```
 [笔记链接](http://note.youdao.com/noteshare?id=97991a678d2862557ef388622a8e52e5&sub=1F6043489AC14F13A82967CB88935E77)
-```
+
