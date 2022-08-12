@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion androidID.compileSdk
+
+    defaultConfig {
+        applicationId androidID.applicationId
+        minSdk androidID.minSdk
+        targetSdk androidID.targetSdk
+        versionCode androidID.versionCode
+        versionName androidID.versionName
+
+        //路由会获取module名称
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+    }
+
+    buildTypes {
+        debug {}
+        release {
+            minifyEnabled false
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    //远程依赖引用
+    dependenciesID.each { k, v -> implementation v }
+
+    implementation project(':lib_router_api')
+    implementation project(':lib_route_annotation')
+    annotationProcessor project(':lib_route_processor')
+}
