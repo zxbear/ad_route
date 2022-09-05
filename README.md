@@ -17,8 +17,8 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.zxbear.ad_route:route_api:v.1.0.2'
-    annotationProcessor ''com.github.zxbear.ad_route:route_compiler:v.1.0.2'
+    implementation 'com.github.zxbear.ad_route:route_api:v.1.0.3'
+    annotationProcessor ''com.github.zxbear.ad_route:route_compiler:v.1.0.3'
 }
 ```
 2. Add annotations
