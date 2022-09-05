@@ -11,6 +11,9 @@ import com.squareup.javapoet.TypeSpec;
 import com.squareup.javapoet.WildcardTypeName;
 import com.zz.routeat.Route;
 
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessor;
+import net.ltgt.gradle.incap.IncrementalAnnotationProcessorType;
+
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashSet;
@@ -22,6 +25,7 @@ import javax.annotation.processing.Filer;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.annotation.processing.Processor;
 import javax.annotation.processing.RoundEnvironment;
+import javax.annotation.processing.SupportedOptions;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
@@ -38,8 +42,9 @@ import javax.tools.JavaFileObject;
  * com.zz.routeps.RouterProcessor
  */
 @AutoService(Processor.class)
-// 支持的 Java 版本
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@IncrementalAnnotationProcessor(IncrementalAnnotationProcessorType.DYNAMIC)//支持注解器增量编译
+@SupportedSourceVersion(SourceVersion.RELEASE_8)// 支持的 Java 版本
+@SupportedOptions("moduleName")//注解器接收的参数
 public class RouterProcessor extends AbstractProcessor {
     private Filer filter;
     private String moduleName;
@@ -58,9 +63,9 @@ public class RouterProcessor extends AbstractProcessor {
         Map<String, String> options = processingEnv.getOptions();
         moduleName = options.get("moduleName");
         elementUtils = processingEnv.getElementUtils();
-        System.out.println("\nstart -------------------------------->\n");
-        System.out.println("moduleName = " + moduleName);
+        //System.out.println("moduleName = " + moduleName);
     }
+
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
@@ -75,7 +80,6 @@ public class RouterProcessor extends AbstractProcessor {
         if (!set.isEmpty()) {
             Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
             generatedClass(routeElements);
-            System.out.println("\nend -------------------------------->\n");
             return true;
         }
         return false;
@@ -113,7 +117,6 @@ public class RouterProcessor extends AbstractProcessor {
                     ClassName.get(
                             packageElement.getQualifiedName().toString(),
                             item.getSimpleName().toString()));
-            logs += "{\"" + router.value() + "\":\"" + item.getSimpleName() + "\"}";
         }
         //构建类
         TypeSpec classSpec = TypeSpec.classBuilder(moduleName + "Router")//类名名
@@ -124,7 +127,6 @@ public class RouterProcessor extends AbstractProcessor {
         //写入文件
         try {
            JavaFile.builder(pack_name, classSpec).build().writeTo(filter);
-            System.out.println("routers = " + logs + "]");
         } catch (IOException e) {
             e.printStackTrace();
         }

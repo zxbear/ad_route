@@ -16,7 +16,6 @@ import java.util.Set;
 import dalvik.system.DexFile;
 
 public class ClassUtils {
-
     public static Set<String> getFileNameByPackageName(Application context, String packageName) {
         Set<String> classNames = new HashSet<>();
         List<String> paths = getSourcePaths(context);
@@ -24,9 +23,9 @@ public class ClassUtils {
             DexFile dexFile = null;
             try {
                 dexFile = new DexFile(path);
-                Enumeration<String> dexens = dexFile.entries();
-                while (dexens.hasMoreElements()){
-                    String className = dexens.nextElement();
+                Enumeration<String> dens = dexFile.entries();
+                while (dens.hasMoreElements()){
+                    String className = dens.nextElement();
                     if (className.startsWith(packageName)){
                         classNames.add(className);
                     }

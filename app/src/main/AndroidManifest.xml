@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Anim_pro"
         tools:targetApi="31">
         <activity
-            android:name=".ui.view.MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
             android:launchMode="singleTask">
             <intent-filter>
@@ -23,13 +23,7 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.view.Test1Activity"
-            android:launchMode="singleTask" />
 
-        <activity
-            android:name=".ui.view.Test2Activity"
-            android:launchMode="singleTask" />
     </application>
 
 </manifest>
